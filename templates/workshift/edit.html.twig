@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Workshift{% endblock %}
+
+{% block body %}
+    <h1>Edit Workshift</h1>
+
+    {{ include('workshift/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_workshift_index') }}">back to list</a>
+
+    {{ include('workshift/_delete_form.html.twig') }}
+{% endblock %}

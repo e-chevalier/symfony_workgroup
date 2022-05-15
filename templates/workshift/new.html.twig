@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Workshift{% endblock %}
+
+{% block body %}
+    <h1>Create new Workshift</h1>
+
+    {{ include('workshift/_form.html.twig') }}
+
+    <a href="{{ path('app_workshift_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Workshift index{% endblock %}
+
+{% block body %}
+    <h1>Workshift index</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for workshift in workshifts %}
+            <tr>
+                <td>{{ workshift.id }}</td>
+                <td>{{ workshift.date ? workshift.date|date('Y-m-d') : '' }}</td>
+                <td>{{ workshift.start }}</td>
+                <td>{{ workshift.end }}</td>
+                <td>
+                    <a href="{{ path('app_workshift_show', {'id': workshift.id}) }}">show</a>
+                    <a href="{{ path('app_workshift_edit', {'id': workshift.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_workshift_new') }}">Create new</a>
+{% endblock %}
