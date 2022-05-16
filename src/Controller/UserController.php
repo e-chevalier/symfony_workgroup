@@ -12,19 +12,27 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+use Psr\Log\LoggerInterface;
+
 
 #[Route('/user')]
 class UserController extends AbstractController
 {
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository, LoggerInterface $logger): Response
     {
 
         //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        //$user = $this->getUser();
+        $myuser = $this->getUser();
+        $users = $userRepository->findAll();
+        
+        // foreach ($users as $user) {
+        //     $logger->info($user->getWorkgroupId());
+        // }
 
         return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'myuser'=> $myuser,
+            'users' => $users
         ]);
     }
 
