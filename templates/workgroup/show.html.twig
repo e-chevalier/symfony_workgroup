@@ -3,20 +3,61 @@
 {% block title %}Workgroup{% endblock %}
 
 {% block body %}
-    <h1>Workgroup</h1>
+    <h1>Workgroup {{ workgroup.name }}  Id: {{ workgroup.id }}</h1>
 
+    
+    <h3>User</h3>
     <table class="table table-hover">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ workgroup.id }}</td>
-            </tr>
+        <thead>
             <tr>
                 <th>Name</th>
-                <td>{{ workgroup.name }}</td>
+                <th>Lastname</th>
+                <th>Roles</th>
             </tr>
+        </thead>
+        <tbody>
+        {% for user in workgroup.getUsers %}
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.roles ? user.roles[0]|json_encode : '' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
+
+
+    <h3>Workshits</h3>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Start</th>
+                <th>End</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for workshift in workgroup.getWorkshifts %}
+            <tr>
+                <td>{{ workshift.id }}</td>
+                <td>{{ workshift.date ? workshift.date|date('Y-m-d') : '' }}</td>
+                <td>{{ workshift.start }} hs</td>
+                <td>{{ workshift.end }} hs</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
 
     <a href="{{ path('app_workgroup_index') }}">back to list</a>
 

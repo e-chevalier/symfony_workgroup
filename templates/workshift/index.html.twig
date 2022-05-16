@@ -12,6 +12,7 @@
                 <th>Date</th>
                 <th>Start</th>
                 <th>End</th>
+                <th>WorkGroup</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ workshift.date ? workshift.date|date('Y-m-d') : '' }}</td>
                 <td>{{ workshift.start }}</td>
                 <td>{{ workshift.end }}</td>
+                <td>{{ workshift.getWorkgroupId }}</td>
                 <td>
                     <a href="{{ path('app_workshift_show', {'id': workshift.id}) }}">show</a>
                     <a href="{{ path('app_workshift_edit', {'id': workshift.id}) }}">edit</a>
