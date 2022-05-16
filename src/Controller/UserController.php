@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -19,7 +21,7 @@ class UserController extends AbstractController
 
         //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         //$user = $this->getUser();
-        
+
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
         ]);

@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\CallbackTransformer;
 
 class RegistrationFormType extends AbstractType
 {
@@ -45,7 +46,12 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-        ;
+            ->add('roles')
+            ->get('roles')
+            ->addModelTransformer(new CallbackTransformer(
+                fn ($rolesAsArray) => count($rolesAsArray) ? $rolesAsArray[0] : null,
+                fn ($rolesAsString) => [$rolesAsString]
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

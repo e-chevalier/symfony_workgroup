@@ -17,7 +17,7 @@ security:
             lazy: true
             provider: app_user_provider
 
-             # by default, the feature allows 5 login attempts per minute
+            # by default, the feature allows 5 login attempts per minute
             login_throttling: null
 
             # configure the maximum login attempts (per minute)
@@ -40,6 +40,12 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
+    role_hierarchy:
+        ROLE_PUBLIC: ROLE_USER
+        ROLE_ASSISTANT: ROLE_PUBLIC
+        ROLE_CHEF: ROLE_ASSISTANT
+        ROLE_ADMIN: ROLE_CHEF
+        
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
